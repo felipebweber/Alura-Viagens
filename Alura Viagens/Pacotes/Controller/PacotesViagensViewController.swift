@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PacotesViagensViewController: UIViewController, UICollectionViewDataSource {
+class PacotesViagensViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let listaViagens: Array<Viagem> = ViagemDAO().retornaTodasAsViagens()
     
@@ -18,8 +18,8 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.colecaoPacotesViagem.dataSource = self
-        // Do any additional setup after loading the view.
+        colecaoPacotesViagem.dataSource = self
+        colecaoPacotesViagem.delegate = self
     }
     
     
@@ -40,7 +40,19 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         celulaPacote.labelPreco.text = "R$ \(viagemAtual.preco)"
         celulaPacote.imagemViagem.image = UIImage(named: viagemAtual.caminhoDaImagem)
         
+        celulaPacote.layer.borderWidth = 0.5
+        celulaPacote.layer.borderColor = UIColor(displayP3Red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor
+        celulaPacote.layer.cornerRadius = 8
         return celulaPacote
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let larguraCelula = collectionView.bounds.width / 2
+        return CGSize(width: larguraCelula - 20, height: 160)
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-20, height: 160) : CGSize(width: collectionView.bounds.width/3-20, height: 250)
+//    }
 
 }
