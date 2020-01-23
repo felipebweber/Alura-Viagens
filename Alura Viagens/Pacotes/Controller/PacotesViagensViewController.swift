@@ -8,18 +8,26 @@
 
 import UIKit
 
-class PacotesViagensViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class PacotesViagensViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
-    let listaViagens: Array<Viagem> = ViagemDAO().retornaTodasAsViagens()
+    @IBOutlet weak var pesquisarViagens: UISearchBar!
+
+    @IBOutlet weak var labelContadorDePacotes: UILabel!
+
     
+    let listaComTodasViagens: Array<Viagem> = ViagemDAO().retornaTodasAsViagens()
+    var listaViagens: Array<Viagem> = []
     
 
     @IBOutlet weak var colecaoPacotesViagem: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        listaViagens = listaComTodasViagens
         colecaoPacotesViagem.dataSource = self
         colecaoPacotesViagem.delegate = self
+        pesquisarViagens.delegate = self
+        self.labelContadorDePacotes.text = self.atualizaContadorLabel()
     }
     
     
@@ -55,4 +63,17 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
 //        return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-20, height: 160) : CGSize(width: collectionView.bounds.width/3-20, height: 250)
 //    }
 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        listaViagens = listaComTodasViagens
+       // se filter diferente de vazio entra no filtro
+        if searchText != ""{
+            listaViagens = listaViagens.filter{ $0.titulo.contains(searchText) }
+        }
+
+        self.labelContadorDePacotes.text = self.atualizaContadorLabel()
+        colecaoPacotesViagem.reloadData()
+    }
+    func atualizaContadorLabel() -> String{
+        return listaViagens.count == 1 ? "1 pacote encontrado" : "\(listaViagens.count) pacotes encontrados"
+    }
 }
