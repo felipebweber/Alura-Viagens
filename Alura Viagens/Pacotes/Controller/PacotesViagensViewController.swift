@@ -8,15 +8,15 @@
 
 import UIKit
 
-class PacotesViagensViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class PacotesViagensViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     @IBOutlet weak var pesquisarViagens: UISearchBar!
 
     @IBOutlet weak var labelContadorDePacotes: UILabel!
 
     
-    let listaComTodasViagens: Array<Viagem> = ViagemDAO().retornaTodasAsViagens()
-    var listaViagens: Array<Viagem> = []
+    let listaComTodasViagens: Array<PacoteViagem> = PacoteViagemDAO().retornaTodasAsViagens()
+    var listaViagens: Array<PacoteViagem> = []
     
 
     @IBOutlet weak var colecaoPacotesViagem: UICollectionView!
@@ -41,12 +41,12 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         let celulaPacote = collectionView.dequeueReusableCell(withReuseIdentifier: "celulaPacote", for: indexPath) as! PacotesViagemCollectionViewCell
 //        celulaPacote.backgroundColor = UIColor.blue
         
-        let viagemAtual = listaViagens[indexPath.item]
+        let pacoteAtual = listaViagens[indexPath.item]
         
-        celulaPacote.labelTitulo.text = viagemAtual.titulo
-        celulaPacote.labelQuantidadeDeDias.text = "\(viagemAtual.quantidadeDeDias) dias"
-        celulaPacote.labelPreco.text = "R$ \(viagemAtual.preco)"
-        celulaPacote.imagemViagem.image = UIImage(named: viagemAtual.caminhoDaImagem)
+        celulaPacote.labelTitulo.text = pacoteAtual.viagem.titulo
+        celulaPacote.labelQuantidadeDeDias.text = "\(pacoteAtual.viagem.quantidadeDeDias) dias"
+        celulaPacote.labelPreco.text = "R$ \(pacoteAtual.viagem.preco)"
+        celulaPacote.imagemViagem.image = UIImage(named: pacoteAtual.viagem.caminhoDaImagem)
         
         celulaPacote.layer.borderWidth = 0.5
         celulaPacote.layer.borderColor = UIColor(displayP3Red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor
@@ -59,6 +59,15 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         return CGSize(width: larguraCelula - 20, height: 160)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let pacote = listaViagens[indexPath.item]
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(identifier: "detalhes") as! DetalhesViagensViewController
+        controller.pacoteSelecionado = pacote
+        self.present(controller, animated: true, completion: nil)
+    }
+    
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-20, height: 160) : CGSize(width: collectionView.bounds.width/3-20, height: 250)
 //    }
@@ -67,7 +76,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         listaViagens = listaComTodasViagens
        // se filter diferente de vazio entra no filtro
         if searchText != ""{
-            listaViagens = listaViagens.filter{ $0.titulo.contains(searchText) }
+            listaViagens = listaViagens.filter{ $0.viagem.titulo.contains(searchText) }
         }
 
         self.labelContadorDePacotes.text = self.atualizaContadorLabel()
