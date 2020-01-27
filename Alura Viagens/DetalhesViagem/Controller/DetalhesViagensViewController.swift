@@ -20,12 +20,18 @@ class DetalhesViagensViewController: UIViewController {
     @IBAction func botaoVoltar(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    @IBOutlet weak var scrollPrincipal: UIScrollView!
+    
+    @IBOutlet weak var textFieldData: UITextField!
+    
     //nao vai ser inicializado pq so vai receber dados quando o pacote for selecionado
     var pacoteSelecionado: PacoteViagem? = nil
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(aumentaScroll(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
         // Do any additional setup after loading the view.
         if let pacote = pacoteSelecionado{
             self.imagemPacoteViagem.image = UIImage(named: pacote.viagem.caminhoDaImagem)
@@ -36,5 +42,22 @@ class DetalhesViagensViewController: UIViewController {
         }
     }
     
-
+    @objc func aumentaScroll(notification: Notification){
+        self.scrollPrincipal.contentSize = CGSize(width: self.scrollPrincipal.frame.width, height: self.scrollPrincipal.frame.height + 320)
+    }
+    
+    @objc func exibeDataTextField(sender: UIDatePicker){
+        let formatador = DateFormatter()
+        formatador.dateFormat = "dd MM yyyy"
+        self.textFieldData.text = formatador.string(from: sender.date)
+    }
+    
+    @IBAction func textFieldEntrouFoco(_ sender: UITextField) {
+        let datePickerView = UIDatePicker()
+        datePickerView.datePickerMode = .date
+        sender.inputView = datePickerView
+        
+        datePickerView.addTarget(self, action: #selector(exibeDataTextField(sender:)), for: .valueChanged)
+    }
+    
 }
