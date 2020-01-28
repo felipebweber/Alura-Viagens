@@ -42,15 +42,16 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
 //        celulaPacote.backgroundColor = UIColor.blue
         
         let pacoteAtual = listaViagens[indexPath.item]
-        
-        celulaPacote.labelTitulo.text = pacoteAtual.viagem.titulo
-        celulaPacote.labelQuantidadeDeDias.text = "\(pacoteAtual.viagem.quantidadeDeDias) dias"
-        celulaPacote.labelPreco.text = "R$ \(pacoteAtual.viagem.preco)"
-        celulaPacote.imagemViagem.image = UIImage(named: pacoteAtual.viagem.caminhoDaImagem)
-        
-        celulaPacote.layer.borderWidth = 0.5
-        celulaPacote.layer.borderColor = UIColor(displayP3Red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor
-        celulaPacote.layer.cornerRadius = 8
+        celulaPacote.configuraCelula(pacoteViagem: pacoteAtual)
+        //foi refatorado 
+//        celulaPacote.labelTitulo.text = pacoteAtual.viagem.titulo
+//        celulaPacote.labelQuantidadeDeDias.text = "\(pacoteAtual.viagem.quantidadeDeDias) dias"
+//        celulaPacote.labelPreco.text = "R$ \(pacoteAtual.viagem.preco)"
+//        celulaPacote.imagemViagem.image = UIImage(named: pacoteAtual.viagem.caminhoDaImagem)
+//
+//        celulaPacote.layer.borderWidth = 0.5
+//        celulaPacote.layer.borderColor = UIColor(displayP3Red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor
+//        celulaPacote.layer.cornerRadius = 8
         return celulaPacote
     }
     
@@ -65,7 +66,9 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(identifier: "detalhes") as! DetalhesViagensViewController
         controller.pacoteSelecionado = pacote
-        self.present(controller, animated: true, completion: nil)
+        // era usado para apresentar, depois refatorei para usar uma viewcontroller
+        // self.present(controller, animated: true, completion: nil)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

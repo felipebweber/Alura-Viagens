@@ -24,6 +24,9 @@ class DetalhesViagensViewController: UIViewController {
     
     @IBOutlet weak var textFieldData: UITextField!
     
+
+    
+    
     //nao vai ser inicializado pq so vai receber dados quando o pacote for selecionado
     var pacoteSelecionado: PacoteViagem? = nil
     
@@ -60,4 +63,12 @@ class DetalhesViagensViewController: UIViewController {
         datePickerView.addTarget(self, action: #selector(exibeDataTextField(sender:)), for: .valueChanged)
     }
     
+    
+    @IBAction func botaoFinalizarCompra(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(identifier: "confirmacaoPagamento") as! ConfirmacaoPagamentoViewController
+        controller.pacoteComprado = pacoteSelecionado
+        //self.present(controller, animated: true, completion: nil)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 }

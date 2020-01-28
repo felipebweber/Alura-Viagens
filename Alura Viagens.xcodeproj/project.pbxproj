@@ -27,6 +27,7 @@
 		55093F8023DB9F1C00C4F3D2 /* img11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55093F6F23DB9F1C00C4F3D2 /* img11.jpg */; };
 		55093F8123DB9F1C00C4F3D2 /* img10.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 55093F7023DB9F1C00C4F3D2 /* img10.jpg */; };
 		55093F8223DB9F1C00C4F3D2 /* icon_hotel.png in Resources */ = {isa = PBXBuildFile; fileRef = 55093F7123DB9F1C00C4F3D2 /* icon_hotel.png */; };
+		550C219F23E062560011A373 /* ConfirmacaoPagamentoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550C219E23E062560011A373 /* ConfirmacaoPagamentoViewController.swift */; };
 		5554082D23A26D4700F3E74C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5554082C23A26D4700F3E74C /* AppDelegate.swift */; };
 		5554082F23A26D4700F3E74C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5554082E23A26D4700F3E74C /* SceneDelegate.swift */; };
 		5554083123A26D4700F3E74C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5554083023A26D4700F3E74C /* ViewController.swift */; };
@@ -61,6 +62,7 @@
 		55093F6F23DB9F1C00C4F3D2 /* img11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img11.jpg; sourceTree = "<group>"; };
 		55093F7023DB9F1C00C4F3D2 /* img10.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img10.jpg; sourceTree = "<group>"; };
 		55093F7123DB9F1C00C4F3D2 /* icon_hotel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_hotel.png; sourceTree = "<group>"; };
+		550C219E23E062560011A373 /* ConfirmacaoPagamentoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmacaoPagamentoViewController.swift; sourceTree = "<group>"; };
 		5554082923A26D4700F3E74C /* Alura Viagens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Alura Viagens.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5554082C23A26D4700F3E74C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5554082E23A26D4700F3E74C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +181,22 @@
 			path = Model/Assets;
 			sourceTree = "<group>";
 		};
+		550C219C23E061FD0011A373 /* ConfirmacaoPagamento */ = {
+			isa = PBXGroup;
+			children = (
+				550C219D23E0622D0011A373 /* Controller */,
+			);
+			path = ConfirmacaoPagamento;
+			sourceTree = "<group>";
+		};
+		550C219D23E0622D0011A373 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				550C219E23E062560011A373 /* ConfirmacaoPagamentoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		5554082023A26D4700F3E74C = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +216,7 @@
 		5554082B23A26D4700F3E74C /* Alura Viagens */ = {
 			isa = PBXGroup;
 			children = (
+				550C219C23E061FD0011A373 /* ConfirmacaoPagamento */,
 				55B96BE623D789260091CDBD /* Pacotes */,
 				55093F5723DB920200C4F3D2 /* DetalhesViagem */,
 				55065CA323A418C30085E7D3 /* ViagemDAO */,
@@ -331,6 +350,7 @@
 				5554084123A27EAD00F3E74C /* Viagem.swift in Sources */,
 				5554083123A26D4700F3E74C /* ViewController.swift in Sources */,
 				55093F5B23DB927B00C4F3D2 /* DetalhesViagensViewController.swift in Sources */,
+				550C219F23E062560011A373 /* ConfirmacaoPagamentoViewController.swift in Sources */,
 				5554084523A2814800F3E74C /* TableViewCell.swift in Sources */,
 				5554084B23A2877500F3E74C /* ViagemDAO.swift in Sources */,
 				55093F5D23DB9CEB00C4F3D2 /* PacoteViagem.swift in Sources */,
