@@ -17,9 +17,7 @@ class DetalhesViagensViewController: UIViewController {
     @IBOutlet weak var labelDataViagem: UILabel!
     @IBOutlet weak var labelPrecoPaoteViagem: UILabel!
     
-    @IBAction func botaoVoltar(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
+    
     @IBOutlet weak var scrollPrincipal: UIScrollView!
     
     @IBOutlet weak var textFieldData: UITextField!
@@ -70,5 +68,12 @@ class DetalhesViagensViewController: UIViewController {
         controller.pacoteComprado = pacoteSelecionado
         //self.present(controller, animated: true, completion: nil)
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @IBAction func botaoVoltar(_ sender: UIButton) {
+        
+        if let navigation = navigationController{
+            navigation.popViewController(animated: true)
+        }
     }
 }
